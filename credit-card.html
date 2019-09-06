@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="sleeve">
+            <div class="credit-card selected">
+                <div class="card-company"><img src="walmart-logo.png" alt=""></div>
+                <div class="card-number">
+                    <div class="digit-group">4234 1302 3798 0265</div>
+                </div>
+                <div class="card-expire"><span class="card-text">CVC</span> <span class="cvc-element">321</span> <span class="card-text">Expires</span> <span class="date-until-element">12/24</span></div>
+                <div class="card-holder">Your Name Here</div>
+                <div class="container-justify">
+                    <div class="card-amount-element">
+                        $300
+                    </div>
+                    <div class="card-type">Debit card</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var creditCardNumberElement = document.querySelector('.digit-group'),
+            cvcElement = document.querySelector('.cvc-element'),
+            dateUntilElement = document.querySelector('.date-until-element'),
+            cardAmountElement = document.querySelector('.card-amount-element');
+
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+
+        function generateSequence() {
+            return getRandomInt(1000, 10000);
+        }
+
+        function generateCardNumber() {
+            var cardNumber = Array.apply(null, {
+                length: 4
+            }).map(function(el) {
+                return generateSequence();
+            }).join(' ');
+            return cardNumber;
+        }
+
+        function generateCVC() {
+            return getRandomInt(100, 1000);
+        }
+
+        function generateDateUntil() {
+            var month = getRandomInt(1, 13);
+            var year = getRandomInt(21, 25);
+
+            return [month, year].join('/');
+        }
+
+        function generateCardAmount() {
+            return '$'.concat(getRandomInt(150, 501));
+        }
+
+        setInterval(function() {
+            creditCardNumberElement.innerHTML = generateCardNumber();
+        }, 300);
+        setInterval(function() {
+            cvcElement.innerHTML = generateCVC();
+        }, 150);
+
+        setInterval(function() {
+            dateUntilElement.innerHTML = generateDateUntil();
+        }, 100);
+
+        setInterval(function() {
+            cardAmountElement.innerHTML = generateCardAmount();
+        }, 500);
+    </script>
+</body>
+
+</html>
